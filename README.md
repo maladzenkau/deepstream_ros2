@@ -43,3 +43,4 @@ sudo apt install default-jre
     source install/setup.bash
     ros2 launch deepstream_ros2_bridge_launch launch.py 
     ```
+Object detection results will be published on topic `/objectDetection`.
