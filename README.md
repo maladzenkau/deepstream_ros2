@@ -12,7 +12,7 @@ sudo apt install default-jre
 ```
 
 ## DeepStream and Kafka server configuration
-- To set up a Kafka server for use with DeepStream, you can refer to the instructions provided in [link1](https://maouriyan.medium.com/how-to-stream-messages-on-deepstream-using-kafka-d7e39de53003) and [link2](https://kafka.apache.org/quickstart). For additional reference, configuration files for DeepStream can be found in the 'deepstream' folder.
+- To set up a Kafka server for use with DeepStream, you can refer to the instructions provided in [link1](https://maouriyan.medium.com/how-to-stream-messages-on-deepstream-using-kafka-d7e39de53003) and [link2](https://kafka.apache.org/quickstart). For additional reference, configuration files for DeepStream can be found in the `deepstream` folder.
 - To start DeepStream application, run:
   ```bash
   deepstream-test5-app -c deepstream_app_config.txt
