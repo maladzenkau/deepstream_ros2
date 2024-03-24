@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+preferred-citation:
+  type: software
+  message: If you use this software, please cite it as below.
+  authors:
+  - family-names: Maladzenkau
+    given-names: Dzmitry
+  title: "deepstream_ros2 "
+  version: 1.0
+  date-released: 2024-24-03
+  license: BSD 3-Clause
+  url: "https://github.com/45kmh/deepstream_ros2"
