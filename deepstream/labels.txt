@@ -1,0 +1,9 @@
+green
+red
+yellow
+rightOnly
+leftOnly
+stop
+50
+noLimits
+sync
