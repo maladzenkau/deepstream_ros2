@@ -37,11 +37,11 @@ def generate_launch_description():
                    ]
     )
 
-    # DeepStream Kafka - ROS2 bridge
+    ## DeepStream Kafka - ROS2 bridge
     ld.add_action(deepstream_kafka_ros2_bridge)
-    # Latency estimation
+    ## Latency estimation
     ld.add_action(latency_estimator)
-    # Depth data synchronization with color data
+    ## Depth data synchronization with color data
     ld.add_action(delay_topic)
 
     return ld
