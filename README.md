@@ -94,10 +94,9 @@ The synchronization node enables the delay of a topic based on a specified laten
   ```bashrc
   gedit ~/deepstream_ros2/src/deepstream_ros2_bridge_launch/launch/launch.py
   ```
-- Uncomment delay and validation nodes:
+- Uncomment delay node:
   ```bashrc
   ld.add_action(delay_topic)
-  ld.add_action(validation)
   ```
 - Change the delay_topic node parameters according to the depth data topic:
 # Example
@@ -109,4 +108,11 @@ The synchronization node enables the delay of a topic based on a specified laten
   ```bashrc
   colcon build --packages-select deepstream_ros2_bridge_launch
   ```
+- To check if the bounding boxes of the detected object correspond to the object on the depth frame, uncomment validation node:
+  ```bashrc
+  ld.add_action(validation)
+  ```
+To make the visual validation, open rviz and show topics `valColorImage` and `valDepthImage`. Example is shown below.
+![Screenshot from 2024-02-19 15-20-57](https://github.com/45kmh/deepstream_ros2/assets/151655734/1e090932-df0a-41fc-b4ce-e6d5cb2b56d2)
+
   
