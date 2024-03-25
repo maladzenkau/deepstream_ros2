@@ -84,7 +84,6 @@ To estimate the latency, your model should be capable of detecting a synchroniza
                 ]
 - Save your configuration and navigate to `ros2_ws` colcon root, source and build the package:
   ```bashrc
-  cd ~/deepstream_ros2/
   colcon build --packages-select deepstream_ros2_bridge_launch
   ```
 The latency will be published on topic `/latency`.
@@ -108,7 +107,6 @@ The synchronization node enables the delay of a topic based on a specified laten
                    ]
 - Save your configuration and navigate to `ros2_ws` colcon root, source and build the package:
   ```bashrc
-  cd ~/deepstream_ros2/
   colcon build --packages-select deepstream_ros2_bridge_launch
   ```
   
