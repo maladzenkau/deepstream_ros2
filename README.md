@@ -1,15 +1,15 @@
 # deepstream_ros2 (Pre-reliese phase)
 This project allows bridging DeepStream inference results (rectangular boxes) with ROS2 in its basic functionality.
-Additionally, due to the delay introduced by the inference process, the option to synchronize depth and color data is provided. For the [Intel® RealSense™ Depth Camera D435i](https://www.intelrealsense.com/depth-camera-d435i/), it is also implemented the extraction of real-world coordinates relative to the camera frame and their transformation into the map frame. (Note: The camera frame should be included in the `URDF` description.)
 
-Also, if you wish to utilize a ROS2 topic of type `sensor_msgs::msg::Image` for object detection, you can employ the [image2rtsp](https://github.com/45kmh/image2rtsp) package to buffer the topic into an RTSP stream.
+Also, if you wish to utilize a ROS2 topic of type `sensor_msgs::msg::Image` for object detection, you can employ the [image2rtsp](https://github.com/45kmh/image2rtsp) package to buffer the topic into an RTSP stream. With a ROS2 topic as DeepStream input, additional functionality can be used to estimate the latency (which appears due to the inference processing time), which can be used to synchronize depth and color data or to estimate the load state of your device. For the [Intel® RealSense™ Depth Camera D435i](https://www.intelrealsense.com/depth-camera-d435i/), it is also implemented the extraction of real-world coordinates relative to the camera frame and their transformation into the map frame. (Note: The camera frame should be included in the `URDF` description.)
 
 The development is being carried out on Ubuntu 20.04 with ROS2 Foxy at Jetson ORIN NX 16GB running JetPack 5.1.2 (DeepStream 6.3).
 ## 1. DeepStream Kafka - ROS2 bridge
 ## Dependencies
 - ROS2 Foxy
-- Java library
+- Some libraries
 ```bash
+pip install -U numpy python-dateutil kafka-python
 sudo apt install default-jre
 ```
 
@@ -58,4 +58,4 @@ bottom_right_x: 614
 bottom_right_y: 261
 ---
 ```
-## 2. Color and Depth data synchronization
+## 2. Latency estimation
