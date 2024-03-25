@@ -19,7 +19,7 @@ sudo apt install default-jre
 
 ## DeepStream and Kafka server configuration
 - To set up a Kafka server for use with DeepStream, you can refer to the instructions provided in [link1](https://maouriyan.medium.com/how-to-stream-messages-on-deepstream-using-kafka-d7e39de53003) and [link2](https://kafka.apache.org/quickstart). For additional reference, configuration files for DeepStream can be found in the `deepstream` folder.
-- To start DeepStream application, run:
+- To start DeepStream application, run your own build with Kafka broker or `test5-app`:
   ```bash
   deepstream-test5-app -c deepstream_app_config.txt
   ```
@@ -87,4 +87,28 @@ To estimate the latency, your model should be capable of detecting a synchroniza
   cd ~/deepstream_ros2/
   colcon build --packages-select deepstream_ros2_bridge_launch
   ```
+The latency will be published on topic `/latency`.
+
 ## 3. Color and depth data synchronization
+The synchronization node enables the delay of a topic based on a specified latency. It's important to note that for topics with low frame rates, this functionality may not provide significant benefits. This synchronization mechanism ensures that detected boxes from the color frame correspond accurately to objects in the depth frame. Additionally, it implies that the depth sensor produces depth frames aligned with the color sensor frames.
+- Open launch file:
+  ```bashrc
+  gedit ~/deepstream_ros2/src/deepstream_ros2_bridge_launch/launch/launch.py
+  ```
+- Uncomment delay and validation nodes:
+  ```bashrc
+  ld.add_action(delay_topic)
+  ld.add_action(validation)
+  ```
+- Change the delay_topic node parameters according to the depth data topic:
+# Example
+       parameters=[
+                   {'topic_to_be_delayed': '/aligned_depth_to_color/image_raw'},
+                   {'fps': 30} # FPS of the topic (should be set the same for both depth and color data topics)
+                   ]
+- Save your configuration and navigate to `ros2_ws` colcon root, source and build the package:
+  ```bashrc
+  cd ~/deepstream_ros2/
+  colcon build --packages-select deepstream_ros2_bridge_launch
+  ```
+  
