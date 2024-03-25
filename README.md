@@ -63,7 +63,7 @@ bottom_right_y: 261
 ---
 ```
 ## 2. Latency estimation
-To estimate the latency, your model should be capable of detecting a synchronization image. It is recommended to use a simple image with a typical background from your dataset. Ensure that the resolution of your synchronization image matches the resolution of the source topic used for object detection. An Example of such an image is shown below.
+To estimate the latency, your model should be capable of detecting a synchronization image. It is recommended to use a simple image with a typical background from your dataset. Ensure that the resolution of your synchronization image matches the resolution of the source topic used for object detection. An example of such an image is shown below.
 ![sync](https://github.com/45kmh/deepstream_ros2/assets/151655734/92b3b257-5ab1-4934-a189-04769182c9f8)
 
 - Open launch file:
@@ -113,6 +113,7 @@ The synchronization node enables the delay of a topic based on a specified laten
   ld.add_action(validation)
   ```
 To make the visual validation, open rviz and show topics `valColorImage` and `valDepthImage`. Example is shown below.
+
 ![Screenshot from 2024-02-19 15-20-57](https://github.com/45kmh/deepstream_ros2/assets/151655734/1e090932-df0a-41fc-b4ce-e6d5cb2b56d2)
 
   
