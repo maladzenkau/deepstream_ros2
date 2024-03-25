@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'kafka_publisher = deepstream_ros2_bridge_py.kafka_publisher:main',
+            'latency_publisher = deepstream_ros2_bridge_py.latency_publisher:main',
         ],
     },
 )

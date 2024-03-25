@@ -7,6 +7,10 @@
   <maintainer email="dmolodenkov@gmail.de">Maladzenkau</maintainer>
   <license>BSD</license>
 
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>cv_bridge</depend>
+
   <exec_depend>rclpy</exec_depend>
   <exec_depend>deepstream_ros2_bridge_cpp</exec_depend>
 
