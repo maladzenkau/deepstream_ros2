@@ -1,11 +1,8 @@
 import rclpy
-import logging
 import cv2
-import numpy as np
 
 from cv_bridge import CvBridge, CvBridgeError
 from rclpy.node import Node
-from std_msgs.msg import Int16
 from sensor_msgs.msg import Image
 from deepstream_ros2_bridge_cpp.msg import ObjectDetection
 
