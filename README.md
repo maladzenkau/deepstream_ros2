@@ -6,7 +6,7 @@ Also, if you wish to utilize a ROS2 topic of type `sensor_msgs::msg::Image` for 
 The development is being carried out on Ubuntu 20.04 with ROS2 Foxy at Jetson ORIN NX 16GB running JetPack 5.1.2 (DeepStream 6.3).
 
 ## To Do:
-Test with ROS2 humble
+Test with ROS2 Humble
 
 ## 1. DeepStream Kafka - ROS2 bridge
 ## Dependencies
