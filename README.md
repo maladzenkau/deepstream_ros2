@@ -83,3 +83,4 @@ To estimate the latency, your model should be capable of detecting a synchroniza
   cd ~/deepstream_ros2/
   colcon build --packages-select deepstream_ros2_bridge_launch
   ```
+  ## 2. Color and depth data synchronization
