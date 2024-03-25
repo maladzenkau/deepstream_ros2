@@ -59,3 +59,27 @@ bottom_right_y: 261
 ---
 ```
 ## 2. Latency estimation
+To estimate the latency, your model should be capable of detecting a synchronization image. It is recommended to use a simple image with a typical background from your dataset. Ensure that the resolution of your synchronization image matches the resolution of the source topic used for object detection.
+![sync](https://github.com/45kmh/deepstream_ros2/assets/151655734/92b3b257-5ab1-4934-a189-04769182c9f8)
+
+- Open launch file:
+  ```bashrc
+  gedit ~/deepstream_ros2/src/deepstream_ros2_bridge_launch/launch/launch.py
+  ```
+- Uncomment latency estimation node:
+  ```bashrc
+  ld.add_action(latency_estimator)
+  ```
+- Change the node parameters according to the color data topic:
+# Example
+        parameters=[
+                    {'frequency': '5'}, # How often the latency should be estimated (in seconds)
+                    {'color_image_topic': 'color/image_raw'}, # topic which serves as a DeepStream source.
+                    {'topic_encoding': 'bgr8'}, # encoding of this topic (could be found using 'ros2 topic info')
+                    {'img_path': '/home/jetson/deepstream_ros2/sync.jpg'} # path to your synchronization image
+                ]
+- Save your configuration and navigate to `ros2_ws` colcon root, source and build the package:
+  ```bashrc
+  cd ~/deepstream_ros2/
+  colcon build --packages-select deepstream_ros2_bridge_launch
+  ```
