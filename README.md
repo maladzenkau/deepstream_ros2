@@ -5,6 +5,7 @@ Additionally, due to the delay introduced by the inference process, the option t
 Also, if you wish to utilize a ROS2 topic of type `sensor_msgs::msg::Image` for object detection, you can employ the [image2rtsp](https://github.com/45kmh/image2rtsp) package to buffer the topic into an RTSP stream.
 
 The development is being carried out on Ubuntu 20.04 with ROS2 Foxy at Jetson ORIN NX 16GB running JetPack 5.1.2 (DeepStream 6.3).
+## 1. DeepStream Kafka - ROS2 bridge
 ## Dependencies
 - ROS2 Foxy
 - Java library
@@ -45,3 +46,16 @@ sudo apt install default-jre
     ros2 launch deepstream_ros2_bridge_launch launch.py 
     ```
 Object detection results will be published on topic `/objectDetection`.
+
+# Message Example
+```bashrc
+---
+time_stamp_kafka: '2024-03-25T10:54:50.968Z'
+detected_object: '50'
+top_left_x: 571
+top_left_y: 216
+bottom_right_x: 614
+bottom_right_y: 261
+---
+```
+## 2. Color and Depth data synchronization
