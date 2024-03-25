@@ -20,7 +20,7 @@ def generate_launch_description():
         executable="latency_publisher",
         name="latency_estimator",
         parameters=[
-                    {'frequency': 5},                                     # How often the latency should be estimated (in seconds)
+                    {'frequency': 5},                                       # How often the latency should be estimated (in seconds)
                     {'color_image_topic': 'color/image_raw'},               # topic which serves as a DeepStream source.
                     {'topic_encoding': 'bgr8'},                             # encoding of this topic (could be found using 'ros2 topic info')
                     {'img_path': '/home/jetson/deepstream_ros2/sync.jpg'}   # path to your synchronization image
