@@ -27,7 +27,6 @@ public:
     publisher_ = this->create_publisher<sensor_msgs::msg::Image>("delayed_topic" + topic, 10);
     RCLCPP_INFO(this->get_logger(), "Synchronization node is up");
     fps = this->get_parameter("fps").as_int();
-    RCLCPP_INFO(this->get_logger(), "FPS parameter value: %d", fps);
   }
 
   void topic_callback(const sensor_msgs::msg::Image::SharedPtr msg)

@@ -37,11 +37,22 @@ def generate_launch_description():
                    ]
     )
 
+    validation = Node(
+        package="deepstream_ros2_bridge_py",
+        executable="validation_publisher",
+        name="validation_publisher",
+        parameters=[
+                    {'color_image_topic': 'color/image_raw'},                   # topic which serves as a DeepStream source.
+                    {'depth_image_topic': '/aligned_depth_to_color/image_raw'}, # depth topic
+                ]
+    )
+
     ## DeepStream Kafka - ROS2 bridge
     ld.add_action(deepstream_kafka_ros2_bridge)
     ## Latency estimation
     ld.add_action(latency_estimator)
     ## Depth data synchronization with color data
     ld.add_action(delay_topic)
+    #ld.add_action(validation)
 
     return ld
