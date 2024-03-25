@@ -24,7 +24,7 @@ class MinimalPublisher(Node):
         self.latency_publisher_ = self.create_publisher(Int16, 'latency', 10)
         self.sub_info_ = self.create_subscription(ObjectDetection, 'objectDetection' , self.object_detection_callback, 1)
 
-        timer_period = self.get_parameter('frequency').get_parameter_value().string_value  # seconds
+        timer_period = self.get_parameter('frequency').get_parameter_value().integer_value  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         
         self.bridge = CvBridge()

@@ -17,6 +17,8 @@ public:
   : Node("minimal_subscriber")
   { 
     this->declare_parameter("topic_to_be_delayed", "/aligned_depth_to_color/image_raw");
+    this->declare_parameter("fps", 20);
+
     topic = this->get_parameter("topic_to_be_delayed").as_string();
     subscription_ = this->create_subscription<sensor_msgs::msg::Image>(
     topic, 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
@@ -24,6 +26,8 @@ public:
     "latency", 10, std::bind(&MinimalSubscriber::latency_callback, this, _1));
     publisher_ = this->create_publisher<sensor_msgs::msg::Image>("delayed_topic" + topic, 10);
     RCLCPP_INFO(this->get_logger(), "Synchronization node is up");
+    fps = this->get_parameter("fps").as_int();
+    RCLCPP_INFO(this->get_logger(), "FPS parameter value: %d", fps);
   }
 
   void topic_callback(const sensor_msgs::msg::Image::SharedPtr msg)
@@ -63,7 +67,7 @@ public:
     else if (latency > 1.5){
       RCLCPP_ERROR(this->get_logger(), "Jetson is overloaded! Immediately stop the object detection task!");
     }
-    buffer_size = static_cast<int>(latency * 30);
+    buffer_size = static_cast<int>(latency * fps);
     RCLCPP_DEBUG(this->get_logger(), "Latency callback for: '%d' images in the buffer", buffer_size);
   }
 
@@ -74,6 +78,7 @@ public:
   std::queue<sensor_msgs::msg::Image::SharedPtr> buffer;
   float latency = 0.0;
   std::string topic;
+  int fps;
   int buffer_size = 0;
   int buffer_counter = 0;
 };
