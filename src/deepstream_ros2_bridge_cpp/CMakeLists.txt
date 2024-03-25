@@ -17,8 +17,17 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+
+add_executable(delay_topic src/delay_topic.cpp)
+ament_target_dependencies(delay_topic rclcpp sensor_msgs std_msgs)
+
+install(TARGETS
+  delay_topic
+  DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
