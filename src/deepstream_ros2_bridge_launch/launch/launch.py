@@ -46,13 +46,28 @@ def generate_launch_description():
                     {'depth_image_topic': '/aligned_depth_to_color/image_raw'}, # depth topic
                 ]
     )
+    realsense_camera = Node(
+        package="deepstream_ros2_bridge_py",
+        executable="object_cam_coordinates_publisher",
+        name="object_cam_coordinates_publisher",
+        parameters=[
+                    {'depth_image_info_topic': '/aligned_depth_to_color/camera_info'},        # depth info topic with intrinsic parameters.
+                    {'depth_image_topic': '/delayed_topic/aligned_depth_to_color/image_raw'}, # delayed or original depth topic
+                    {'camera_frame': 'camera_link'},                                          # camera frame according to an URDF model
+                ]
+    )
 
     ## DeepStream Kafka - ROS2 bridge
     ld.add_action(deepstream_kafka_ros2_bridge)
+
     ## Latency estimation
     ld.add_action(latency_estimator)
+
     ## Depth data synchronization with color data
     ld.add_action(delay_topic)
     #ld.add_action(validation)
+
+    ## Real world coordinates with Realsense camera
+    ld.add_action(realsense_camera)
 
     return ld

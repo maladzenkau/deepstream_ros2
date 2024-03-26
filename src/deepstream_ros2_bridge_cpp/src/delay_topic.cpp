@@ -25,7 +25,6 @@ public:
     subscription_latency_ = this->create_subscription<std_msgs::msg::Int16>(
     "latency", 10, std::bind(&MinimalSubscriber::latency_callback, this, _1));
     publisher_ = this->create_publisher<sensor_msgs::msg::Image>("delayed_topic" + topic, 10);
-    RCLCPP_INFO(this->get_logger(), "Synchronization node is up");
     fps = this->get_parameter("fps").as_int();
   }
 
@@ -85,7 +84,20 @@ public:
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<MinimalSubscriber>());
+  auto node = std::make_shared<MinimalSubscriber>();
+  RCLCPP_INFO(node->get_logger(), "Latency estimator is up");
+  try
+  {
+    rclcpp::spin(node);
+  }
+  catch (const std::exception& e)
+  {
+    RCLCPP_ERROR(node->get_logger(), "Encountered error: %s", e.what());
+  }
+  catch (...)
+  {
+    RCLCPP_ERROR(node->get_logger(), "Unknown error occurred");
+  }
   rclcpp::shutdown();
   return 0;
 }

@@ -51,9 +51,15 @@ def main(args=None):
     rclpy.init(args=args)
     minimal_publisher = MinimalPublisher()
     minimal_publisher.get_logger().info('Latency estimator is up')
-    rclpy.spin(minimal_publisher)
-    minimal_publisher.destroy_node()
-    rclpy.shutdown()
+    try:
+        rclpy.spin(minimal_publisher)
+    except (Exception, KeyboardInterrupt) as e:
+        if isinstance(e,Exception):
+            minimal_publisher.get_logger().info(f'"Encountered error:{e}"')
+        else:
+            minimal_publisher.get_logger().info("Keyboard interrupt detected, exiting...")
+        minimal_publisher.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
