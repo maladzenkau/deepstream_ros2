@@ -74,14 +74,14 @@ def generate_launch_description():
     ld.add_action(deepstream_kafka_ros2_bridge)
 
     ## Latency estimation
-    ld.add_action(latency_estimator)
+    #ld.add_action(latency_estimator)
 
     ## Depth data synchronization with color data
-    ld.add_action(delay_topic)
+    #ld.add_action(delay_topic)
     #ld.add_action(validation)
 
     ## Real world coordinates with Realsense camera
-    ld.add_action(realsense_camera)
-    ld.add_action(tf_camera_to_map)
+    #ld.add_action(realsense_camera)
+    #ld.add_action(tf_camera_to_map)
 
     return ld
