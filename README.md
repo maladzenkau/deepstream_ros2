@@ -13,7 +13,7 @@ Test with ROS2 Humble
 - ROS2 Foxy
 - Some libraries
 ```bash
-pip install -U numpy python-dateutil kafka-python
+pip install -U numpy python-dateutil kafka-python pyrealsense2
 sudo apt install default-jre
 ```
 
@@ -116,4 +116,14 @@ To make the visual validation, open rviz and show topics `valColorImage` and `va
 
 ![Screenshot from 2024-02-19 15-20-57](https://github.com/45kmh/deepstream_ros2/assets/151655734/1e090932-df0a-41fc-b4ce-e6d5cb2b56d2)
 
-  
+## 4. Object coordinates with Realsense Camera d435i
+It's possible to extract real-world 3D coordinates from the Realsense Camera d435i pixel coordinates and then convert them to the map frame. This code should be applicable to other Realsense cameras as well.
+- To project a pixel into the real-world camera frame, uncomment the relevant section in the code:
+  ```bashrc
+  ld.add_action(realsense_camera)
+  ```
+And change the parameters according to the explanations provided is the launch file. 
+- To project a pixel into the real-world map frame, uncomment transformation node:
+    ```bashrc
+  ld.add_action(tf_camera_to_map)
+  ```
