@@ -21,11 +21,28 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
+
+set(dependencies
+  tf2
+  geometry_msgs
+  tf2_ros
+  tf2_geometry_msgs
+  nav_msgs
+)
+
+add_executable(object_map_coordinates src/object_map_coordinates.cpp)
+ament_target_dependencies(object_map_coordinates ${dependencies})
 
 add_executable(delay_topic src/delay_topic.cpp)
 ament_target_dependencies(delay_topic rclcpp sensor_msgs std_msgs)
 
 install(TARGETS
+  object_map_coordinates
   delay_topic
   DESTINATION lib/${PROJECT_NAME})
 

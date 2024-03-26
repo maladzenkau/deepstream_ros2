@@ -15,13 +15,14 @@ def generate_launch_description():
                     {'known_objects': ['red', 'yellow', 'green', 'rightOnly', 'leftOnly', 'stop', '50', 'noLimits', 'sync']} # Classes from label.txt
                 ]
     )
+
     latency_estimator = Node(
         package="deepstream_ros2_bridge_py",
         executable="latency_publisher",
         name="latency_estimator",
         parameters=[
                     {'frequency': 5},                                       # How often the latency should be estimated (in seconds)
-                    {'color_image_topic': 'color/image_raw'},               # topic which serves as a DeepStream source.
+                    {'color_image_topic': 'color/image_raw'},               # topic which serves as a DeepStream source
                     {'topic_encoding': 'bgr8'},                             # encoding of this topic (could be found using 'ros2 topic info')
                     {'img_path': '/home/jetson/deepstream_ros2/sync.jpg'}   # path to your synchronization image
                 ]
@@ -42,19 +43,30 @@ def generate_launch_description():
         executable="validation_publisher",
         name="validation_publisher",
         parameters=[
-                    {'color_image_topic': 'color/image_raw'},                   # topic which serves as a DeepStream source.
+                    {'color_image_topic': 'color/image_raw'},                   # topic which serves as a DeepStream source
                     {'depth_image_topic': '/aligned_depth_to_color/image_raw'}, # depth topic
                 ]
     )
+
     realsense_camera = Node(
         package="deepstream_ros2_bridge_py",
         executable="object_cam_coordinates_publisher",
         name="object_cam_coordinates_publisher",
         parameters=[
-                    {'depth_image_info_topic': '/aligned_depth_to_color/camera_info'},        # depth info topic with intrinsic parameters.
+                    {'depth_image_info_topic': '/aligned_depth_to_color/camera_info'},        # depth info topic with intrinsic parameters
                     {'depth_image_topic': '/delayed_topic/aligned_depth_to_color/image_raw'}, # delayed or original depth topic
                     {'camera_frame': 'camera_link'},                                          # camera frame according to an URDF model
-                    {'coordinate_topic': 'objectCoordinateInCameraFrame'},                    # topic on which object coordinates will be published
+                    {'coordinate_topic': '/objectCoordinateInCameraFrame'},                   # topic on which object coordinates in camera frame will be published
+                ]
+    )
+
+    tf_camera_to_map = Node(
+        package="deepstream_ros2_bridge_cpp",
+        executable="object_map_coordinates",
+        name="object_map_coordinates",
+        parameters=[
+                    {'coordinate_topic': '/objectCoordinateInCameraFrame'},  # topic on which object coordinates in camera frame are published
+                    {'coordinate_map_topic': '/objectCoordinateInMapFrame'}, # topic on which object coordinates in map frame will be published
                 ]
     )
 
@@ -70,5 +82,6 @@ def generate_launch_description():
 
     ## Real world coordinates with Realsense camera
     ld.add_action(realsense_camera)
+    ld.add_action(tf_camera_to_map)
 
     return ld
