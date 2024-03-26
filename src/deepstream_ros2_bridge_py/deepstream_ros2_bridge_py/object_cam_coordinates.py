@@ -23,12 +23,13 @@ class ImageListener(Node):
         self.declare_parameter('depth_image_info_topic', '/aligned_depth_to_color/camera_info')
         self.declare_parameter('depth_image_topic', '/delayed_topic/aligned_depth_to_color/image_raw')
         self.declare_parameter('camera_frame', 'camera_link')
+        self.declare_parameter('coordinate_topic', 'objectCoordinateInCameraFrame')
 
         self.bridge = CvBridge()
         self.sub = self.create_subscription(msg_Image, self.get_parameter('depth_image_topic').get_parameter_value().string_value, self.imageDepthCallback, 1)
         self.sub_info = self.create_subscription(CameraInfo, self.get_parameter('depth_image_info_topic').get_parameter_value().string_value, self.imageDepthInfoCallback, 1)
         self.sub_boxes = self.create_subscription(ObjectDetection, 'objectDetection', self.bboxes_callback, 1)
-        self.publisher_ = self.create_publisher(PoseStamped, 'objectCoordinateInCameraFrame', 10)
+        self.publisher_ = self.create_publisher(PoseStamped, self.get_parameter('coordinate_topic').get_parameter_value().string_value, 10)
 
         self.intrinsics = None
         self.pix = None

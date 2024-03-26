@@ -54,6 +54,7 @@ def generate_launch_description():
                     {'depth_image_info_topic': '/aligned_depth_to_color/camera_info'},        # depth info topic with intrinsic parameters.
                     {'depth_image_topic': '/delayed_topic/aligned_depth_to_color/image_raw'}, # delayed or original depth topic
                     {'camera_frame': 'camera_link'},                                          # camera frame according to an URDF model
+                    {'coordinate_topic': 'objectCoordinateInCameraFrame'},                    # topic on which object coordinates will be published
                 ]
     )
 
