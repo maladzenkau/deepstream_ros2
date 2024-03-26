@@ -122,7 +122,7 @@ It's possible to extract real-world 3D coordinates from the Realsense Camera d43
   ```bashrc
   ld.add_action(realsense_camera)
   ```
-And change the parameters according to the explanations provided is the launch file. 
+And change the parameters according to the explanations provided is the launch file. Coordinates will be available as a Pose message on the choosen topic.
 - To project a pixel into the real-world map frame, uncomment transformation node:
     ```bashrc
   ld.add_action(tf_camera_to_map)
