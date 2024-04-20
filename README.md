@@ -26,7 +26,7 @@ sudo apt install default-jre
 ## Install
 - Clone the package:
   ```bashrc
-  git clone https://github.com/45kmh/deepstream_ros2
+  git clone https://github.com/maladzenkau/deepstream_ros2
   ```
 - Change the parameters in the launch file according to your needs:
   ```bashrc
